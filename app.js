@@ -2,6 +2,10 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = 3000;
+const getLocalIP = require('./ip');
+
+
+const interfaceip = getLocalIP();
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -12,6 +16,6 @@ app.get('/', (req, res) => {
 });
 
 // Start the server
-app.listen(port, '192.168.1.148', () => {
-    console.log(`Server running at http://192.168.1.148:${port}`);
+app.listen(port, `${interfaceip}`, () => {
+    console.log(`Server running at http://${interfaceip}:${port}`);
 });
